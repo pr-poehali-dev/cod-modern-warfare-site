@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;600;700;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,87 +8,33 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
-
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
-
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
-
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* HUD Colors */
+    --hud-accent: #c8a84b;
+    --hud-green: #4a8c5c;
+    --hud-border: rgba(200, 168, 75, 0.25);
+    --hud-bg: rgba(8, 10, 14, 0.85);
+    --hud-dark: #080a0e;
+    --hud-muted: rgba(200, 168, 75, 0.5);
+    --hud-dim: rgba(200, 168, 75, 0.2);
   }
 }
 
@@ -94,8 +42,135 @@
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
+    font-family: "Share Tech Mono", monospace;
+  }
+}
+
+/* Scan lines overlay */
+.scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+}
+
+/* Moving scan beam */
+.scan-beam {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(200, 168, 75, 0.025) 50%,
+    transparent 100%
+  );
+  height: 200px;
+  animation: scan-move 6s linear infinite;
+}
+
+@keyframes scan-move {
+  0% {
+    transform: translateY(-200px);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+/* Vignette */
+.vignette {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+/* HUD flicker */
+@keyframes hud-flicker {
+  0%,
+  95%,
+  100% {
+    opacity: 1;
+  }
+  96% {
+    opacity: 0.85;
+  }
+  97% {
+    opacity: 1;
+  }
+  98% {
+    opacity: 0.9;
+  }
+  99% {
+    opacity: 1;
+  }
+}
+
+.hud-flicker {
+  animation: hud-flicker 8s infinite;
+}
+
+/* Grid background */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(200, 168, 75, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 168, 75, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Static noise on text */
+@keyframes glitch {
+  0%,
+  100% {
+    clip-path: inset(0 0 98% 0);
+    transform: translateX(0);
+  }
+  10% {
+    clip-path: inset(20% 0 60% 0);
+    transform: translateX(-3px);
+  }
+  20% {
+    clip-path: inset(50% 0 30% 0);
+    transform: translateX(3px);
+  }
+  30% {
+    clip-path: inset(80% 0 5% 0);
+    transform: translateX(-1px);
+  }
+  40% {
+    clip-path: inset(10% 0 85% 0);
+    transform: translateX(2px);
+  }
+  50% {
+    clip-path: inset(0 0 98% 0);
+    transform: translateX(0);
+  }
+}
+
+.glitch-text::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  color: #c8a84b;
+  animation: glitch 5s infinite;
+  opacity: 0.5;
+}
+
+/* Radio noise animation */
+@keyframes radio-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.02);
   }
 }

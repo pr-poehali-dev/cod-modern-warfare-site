@@ -7,6 +7,7 @@ export default {
 		"./components/**/*.{ts,tsx}",
 		"./app/**/*.{ts,tsx}",
 		"./src/**/*.{ts,tsx}",
+			"./1775851625696517504.html"
 	],
 	prefix: "",
 	theme: {
@@ -61,6 +62,15 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				hud: {
+					accent: 'var(--hud-accent)',
+					green: 'var(--hud-green)',
+					border: 'var(--hud-border)',
+					bg: 'var(--hud-bg)',
+					dark: 'var(--hud-dark)',
+					muted: 'var(--hud-muted)',
+					dim: 'var(--hud-dim)',
 				}
 			},
 			borderRadius: {
