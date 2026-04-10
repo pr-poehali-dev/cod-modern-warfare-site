@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import Icon from "@/components/ui/icon";
+import AC130Screen from "@/components/AC130Screen";
+import MissileSection from "@/components/MissileSection";
+import HudCorner from "@/components/HudCorner";
 
 const BOOT_LINES = [
   "ИНИЦИАЛИЗАЦИЯ СИСТЕМЫ СВЯЗИ...",
@@ -469,6 +472,76 @@ export default function Index() {
           </div>
         </aside>
       </main>
+
+      {/* AC-130 + Missile sections */}
+      <div className="border-t border-hud-border mt-4">
+
+        {/* AC-130 Section */}
+        <section className="py-12 px-6">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="h-px flex-1 bg-hud-border" />
+              <span className="text-[10px] font-mono tracking-[0.4em] text-hud-muted uppercase">// Air Support — AC-130U Spectre //</span>
+              <div className="h-px flex-1 bg-hud-border" />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+              {/* AC-130 Canvas Screen */}
+              <div>
+                <div className="text-[9px] font-mono text-hud-muted tracking-widest uppercase mb-2">Вид оператора — прямая трансляция</div>
+                <AC130Screen />
+              </div>
+
+              {/* Info panel */}
+              <div className="space-y-4">
+                <div className="border border-hud-border p-4 bg-black/30 relative">
+                  <HudCorner position="tl" size={12} />
+                  <HudCorner position="tr" size={12} />
+                  <HudCorner position="bl" size={12} />
+                  <HudCorner position="br" size={12} />
+                  <div className="space-y-3 font-mono text-[10px]">
+                    <div className="text-hud-accent tracking-widest uppercase text-[9px] mb-3">// Статус борта</div>
+                    {[
+                      { label: 'Позывной', value: 'SPECTRE-1' },
+                      { label: 'Тип ВС', value: 'Lockheed AC-130U' },
+                      { label: 'Вооружение', value: '105mm / 40mm / 25mm' },
+                      { label: 'Высота', value: '8,240 ft MSL' },
+                      { label: 'Скорость', value: '300 kt' },
+                      { label: 'Район', value: 'Urzikstan AO-7' },
+                    ].map(row => (
+                      <div key={row.label} className="flex justify-between">
+                        <span className="text-hud-muted tracking-widest">{row.label}</span>
+                        <span className="text-hud-accent">{row.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="border border-red-900 p-3 bg-red-950/20 relative">
+                  <HudCorner position="tl" size={10} />
+                  <HudCorner position="tr" size={10} />
+                  <HudCorner position="bl" size={10} />
+                  <HudCorner position="br" size={10} />
+                  <div className="flex items-start gap-3">
+                    <div className="text-red-600 text-lg mt-0.5">⬛</div>
+                    <div>
+                      <div className="text-red-500 font-mono text-[9px] tracking-widest uppercase font-bold">Аудио заглушено</div>
+                      <div className="text-red-800 font-mono text-[8px] tracking-widest mt-1">
+                        Прямая трансляция засекречена. Доступ к аудиоканалу ограничен уровнем Tier-1.
+                        Запись ведётся в защищённое хранилище.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Missile Section */}
+        <MissileSection />
+
+      </div>
     </div>
   );
 }
